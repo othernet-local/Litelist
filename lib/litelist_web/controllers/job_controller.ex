@@ -3,10 +3,12 @@ defmodule LitelistWeb.JobController do
 
   alias Litelist.Posts
   alias Litelist.Posts.Post
+  alias Litelist.Image
 
   alias LitelistWeb.Utils.SharedUtils
   
   @post_type "job"
+  @image_limit 3
   @permitted_params ["contact_info",
     "description",
     "salary",
@@ -25,7 +27,9 @@ defmodule LitelistWeb.JobController do
   end
 
   def new(conn, _params) do
-    changeset = Posts.change_post(%Post{})
+    changeset = Posts.change_post(%Post{
+      images: List.duplicate(%Image{}, @image_limit)
+    })
     render(conn, "new.html", changeset: changeset)
   end
 
