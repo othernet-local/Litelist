@@ -5,7 +5,6 @@ defmodule Litelist.Posts do
 
   import Ecto.Query, warn: false
   alias Litelist.Repo
-
   alias Litelist.Posts.Post
   alias Litelist.Posts.Search
 
@@ -19,6 +18,10 @@ defmodule Litelist.Posts do
 
   """
   def list_posts do
+    Repo.all(Post)
+  end
+
+  def list_recent_posts do
     Repo.all(Post)
   end
 

@@ -45,6 +45,15 @@ defmodule LitelistWeb.Router do
     resources "/emergency_info", EmergencyInformationController, only: [:new, :create, :edit, :update, :delete]
   end
 
+  scope "/admin",LitelistWeb do
+    pipe_through [:browser, :auth, :ensure_auth]
+    get "/", AdminController, :index
+    get "/configure", AdminController, :configure
+    put "/update_configuration", AdminController, :update_configuration
+    get "/moderation", AdminController, :moderation_information
+    get "/moderate", AdminController, :moderate
+  end
+  
   scope "/", LitelistWeb do
     pipe_through [:browser, :auth]
 
